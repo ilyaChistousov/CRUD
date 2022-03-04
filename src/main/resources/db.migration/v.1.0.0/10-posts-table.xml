@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="10" author="ilya">
+        <createTable tableName="posts">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="writer_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="writer_id"
+                             referencedTableName="writers"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="content" type="varchar(100)"/>
+            <column name="created" type="timestamp"/>
+            <column name="updated" type="timestamp"/>
+            <column name="post_status" type="enum('ACTIVE', 'UNDER_REVIEW', 'DELETED')"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="posts"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
