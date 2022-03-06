@@ -10,37 +10,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LabelRepoImpl implements LabelRepository {
+    private static final String GET_ONE_SQL = "select id, name from labels where id = ?";
+    private static final String GET_ALL_SQL = "select * from labels";
+    private static final String SAVE_SQL = "insert into labels (post_id, name) values (?, ?)";
+    private static final String UPDATE_SQL = "update labels set name = ? where id = ?";
+    private static final String DELETE_SQL = "delete from labels where id = ?";
 
     @Override
     @SneakyThrows(SQLException.class)
     public Label getById(Long id) {
-        Label returnedLabel = new Label();
-        String sql = "select id, name from labels where id = ?";
 
         try(Connection connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(GET_ONE_SQL)) {
             statement.setLong(1, id);
             ResultSet result = statement.executeQuery();
             result.next();
-            returnedLabel.setId(result.getLong("id"));
-            returnedLabel.setName(result.getString("name"));
+            return buildLabel(result);
         }
-
-        return returnedLabel;
     }
 
     @Override
     @SneakyThrows(SQLException.class)
     public List<Label> getAll() {
         List<Label> labels = new ArrayList<>();
-        String sql = "select * from labels";
 
         try(Connection connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(GET_ALL_SQL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                labels.add(new Label(resultSet.getLong("id"),
-                        resultSet.getString("name")));
+                labels.add(buildLabel(resultSet));
             }
         }
 
@@ -50,10 +48,9 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int save(Label label, Long postIdId) {
-        String sql = "insert into labels (post_id, name) values (?, ?)";
 
         try(Connection connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(SAVE_SQL)) {
             statement.setLong(1, postIdId);
             statement.setString(2, label.getName());
             return statement.executeUpdate();
@@ -64,10 +61,9 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int update(Label newLabel, Long id)  {
-        String sql = "update labels set name = ? where id = ?";
 
         try(Connection connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, newLabel.getName());
             statement.setLong(2, id);
             return statement.executeUpdate();
@@ -77,12 +73,19 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int delete(Long id) {
-        String sql = "delete from labels where id = ?";
 
         try(Connection connection = ConnectionUtil.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+            PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
             statement.setLong(1, id);
             return statement.executeUpdate();
         }
+    }
+
+    @SneakyThrows(SQLException.class)
+    private Label buildLabel(ResultSet resultSet) {
+        return new Label(
+                resultSet.getLong("id"),
+                resultSet.getString("name")
+        );
     }
 }
