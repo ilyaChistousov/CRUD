@@ -16,7 +16,7 @@ public class PostRepoImpl implements PostRepository {
     private static final String GET_ALL_SQL = "select * from posts";
     private static final String SAVE_SQL = "insert into posts (writer_id, content, created, updated, post_status) " +
             "values(?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "update posts set content = ? updated = ? post_status = ? where id = ?";
+    private static final String UPDATE_SQL = "update posts set content = ?, updated = ?, post_status = ? where id = ?";
     private static final String DELETE_SQL = "delete from posts where id = ?";
     private static final String GET_LABELS_SQL = "select * from labels l join posts p on l.post_id = p.id " +
             "where p.id = ?";

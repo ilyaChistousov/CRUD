@@ -1,7 +1,5 @@
 package service.Impl;
 
-import liquibase.pro.packaged.W;
-import model.Post;
 import model.Writer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

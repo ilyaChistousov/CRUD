@@ -19,7 +19,6 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public Label getById(Long id) {
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_ONE_SQL)) {
             statement.setLong(1, id);
@@ -48,7 +47,6 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int save(Label label, Long postIdId) {
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(SAVE_SQL)) {
             statement.setLong(1, postIdId);
@@ -61,7 +59,6 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int update(Label newLabel, Long id)  {
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, newLabel.getName());
@@ -73,7 +70,6 @@ public class LabelRepoImpl implements LabelRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public int delete(Long id) {
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
             statement.setLong(1, id);

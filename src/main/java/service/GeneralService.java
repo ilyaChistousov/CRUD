@@ -1,8 +1,5 @@
 package service;
 
-import repository.GeneralRepository;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public interface GeneralService <T, ID> {

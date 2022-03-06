@@ -2,7 +2,6 @@ package service.Impl;
 
 import lombok.SneakyThrows;
 import model.Post;
-import repository.Impl.PostRepoImpl;
 import repository.PostRepository;
 import service.PostService;
 
