@@ -2,7 +2,6 @@ package repository.Impl;
 
 import lombok.SneakyThrows;
 import model.Post;
-import model.PostStatus;
 import model.Writer;
 import repository.WriterRepository;
 import util.ConnectionUtil;
@@ -22,7 +21,6 @@ public class WriterRepoImpl implements WriterRepository {
     @Override
     @SneakyThrows(SQLException.class)
     public Writer getById(Long id) {
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_ONE_SQL)) {
             statement.setLong(1, id);
@@ -90,12 +88,7 @@ public class WriterRepoImpl implements WriterRepository {
             statement.setLong(1, writerId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
-                posts.add(new Post(resultSet.getLong("id"),
-                        resultSet.getString("content"),
-                        resultSet.getTimestamp("created"),
-                        resultSet.getTimestamp("updated"),
-                        PostRepoImpl.getLabelsOfPost((resultSet.getLong("id"))),
-                        PostStatus.valueOf(resultSet.getString("post_status"))));
+                posts.add(PostRepoImpl.buildPost(resultSet));
             }
         }
         return posts;

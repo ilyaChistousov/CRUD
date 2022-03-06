@@ -104,7 +104,7 @@ public class PostRepoImpl implements PostRepository {
     }
 
     @SneakyThrows(SQLException.class)
-    private Post buildPost(ResultSet resultSet) {
+    public static Post buildPost(ResultSet resultSet) {
         return new Post(
                 resultSet.getLong("id"),
                 resultSet.getString("content"),
