@@ -28,7 +28,6 @@ public class LabelController {
     @SneakyThrows
     public void update(String newName, Long id) {
         Label newLabel = new Label(id, newName);
-        newLabel.setName(newName);
         service.update(newLabel, id);
     }
 
