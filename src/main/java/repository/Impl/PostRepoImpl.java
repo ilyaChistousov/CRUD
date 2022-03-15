@@ -66,13 +66,13 @@ public class PostRepoImpl implements PostRepository {
 
     @Override
     @SneakyThrows(SQLException.class)
-    public int update(Post newPost, Long id) {
+    public int update(Post newPost) {
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, newPost.getContent());
             statement.setTimestamp(2, newPost.getUpdated());
             statement.setString(3, newPost.getStatus().toString());
-            statement.setLong(4, id);
+            statement.setLong(4, newPost.getId());
             return statement.executeUpdate();
         }
     }
@@ -90,7 +90,6 @@ public class PostRepoImpl implements PostRepository {
     @SneakyThrows(SQLException.class)
     public static List<Label> getLabelsOfPost(Long postId) {
         List<Label> labels = new ArrayList<>();
-
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(GET_LABELS_SQL)) {
             statement.setLong(1, postId);

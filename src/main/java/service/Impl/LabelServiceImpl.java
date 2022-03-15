@@ -28,19 +28,19 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public int save(Label label, Long postId) {
+    public int save(Label label) {
         if(label.getName().isEmpty()) {
             throw new NullPointerException("Name should`t be empty");
         }
-        return labelRepo.save(label, postId);
+        return labelRepo.save(label);
     }
 
     @Override
-    public int update(Label newLabel, Long id){
+    public int update(Label newLabel){
         if(newLabel.getName().isEmpty()) {
             throw new NullPointerException("New name should`n be empty");
         }
-        return labelRepo.update(newLabel, id);
+        return labelRepo.update(newLabel);
     }
 
     @Override

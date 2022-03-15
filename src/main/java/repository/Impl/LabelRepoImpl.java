@@ -12,7 +12,7 @@ import java.util.List;
 public class LabelRepoImpl implements LabelRepository {
     private static final String GET_ONE_SQL = "select id, name from labels where id = ?";
     private static final String GET_ALL_SQL = "select * from labels";
-    private static final String SAVE_SQL = "insert into labels (post_id, name) values (?, ?)";
+    private static final String SAVE_SQL = "insert into labels (name) values (?)";
     private static final String UPDATE_SQL = "update labels set name = ? where id = ?";
     private static final String DELETE_SQL = "delete from labels where id = ?";
 
@@ -46,11 +46,10 @@ public class LabelRepoImpl implements LabelRepository {
 
     @Override
     @SneakyThrows(SQLException.class)
-    public int save(Label label, Long postIdId) {
+    public int save(Label label) {
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(SAVE_SQL)) {
-            statement.setLong(1, postIdId);
-            statement.setString(2, label.getName());
+            statement.setString(1, label.getName());
             return statement.executeUpdate();
         }
     }
@@ -58,11 +57,11 @@ public class LabelRepoImpl implements LabelRepository {
 
     @Override
     @SneakyThrows(SQLException.class)
-    public int update(Label newLabel, Long id)  {
+    public int update(Label newLabel)  {
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, newLabel.getName());
-            statement.setLong(2, id);
+            statement.setLong(2, newLabel.getId());
             return statement.executeUpdate();
         }
     }

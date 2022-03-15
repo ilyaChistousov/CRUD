@@ -11,10 +11,10 @@ public class LabelController {
 
     private final LabelServiceImpl service = new LabelServiceImpl(new LabelRepoImpl());
 
-    public void addNewLabel(String name, Long postId) {
+    public void addNewLabel(String name) {
         Label label = new Label();
         label.setName(name);
-        service.save(label, postId);
+        service.save(label);
     }
 
     public Label getLabel(Long id) {
@@ -26,9 +26,9 @@ public class LabelController {
     }
 
     @SneakyThrows
-    public void update(String newName, Long id) {
-        Label newLabel = new Label(id, newName);
-        service.update(newLabel, id);
+    public void update(String newName, Long labelId) {
+        Label newLabel = new Label(labelId, newName);
+        service.update(newLabel);
     }
 
     public void delete(Long id) {

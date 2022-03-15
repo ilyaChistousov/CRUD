@@ -5,5 +5,5 @@ import model.Writer;
 
 public interface WriterRepository extends GeneralRepository<Writer, Long> {
 
-    int save(Writer writer);
+    int save(Writer entity);
 }

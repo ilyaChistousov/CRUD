@@ -27,9 +27,10 @@ public class WriterController {
 
     public void updateWriter(String newFirstName, String newLastName, Long id) {
         Writer updatedWriter = new Writer();
+        updatedWriter.setId(id);
         updatedWriter.setFirstName(newFirstName);
         updatedWriter.setLastName(newLastName);
-        writerService.update(updatedWriter, id);
+        writerService.update(updatedWriter);
     }
 
     public void deleteWriter(Long id) {

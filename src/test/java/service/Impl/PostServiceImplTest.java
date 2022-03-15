@@ -78,18 +78,18 @@ class PostServiceImplTest {
         Post newPost = new Post();
         newPost.setContent("new Content");
 
-        when(postRepo.update(eq(newPost), any(Long.class))).thenReturn(1);
+        when(postRepo.update(eq(newPost))).thenReturn(1);
 
-        assertEquals(1, postService.update(newPost, 1L));
+        assertEquals(1, postService.update(newPost));
     }
 
     @Test
     void updateThrowNPEIfNewContentIsNullTest() {
         Post newPost = new Post();
 
-        when(postRepo.update(eq(newPost), any(Long.class))).thenReturn(1);
+        when(postRepo.update(eq(newPost))).thenReturn(1);
 
-        assertThrows(NullPointerException.class, () -> postService.update(newPost, 1L));
+        assertThrows(NullPointerException.class, () -> postService.update(newPost));
     }
 
     @Test

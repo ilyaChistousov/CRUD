@@ -4,5 +4,5 @@ import model.Label;
 
 public interface LabelService extends GeneralService <Label, Long> {
 
-    int save(Label label, Long postId);
+    int save(Label label);
 }

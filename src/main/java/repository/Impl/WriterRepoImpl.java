@@ -59,12 +59,12 @@ public class WriterRepoImpl implements WriterRepository {
 
     @Override
     @SneakyThrows(SQLException.class)
-    public int update(Writer writer, Long id) {
+    public int update(Writer writer) {
         try(Connection connection = ConnectionUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
             statement.setString(1, writer.getFirstName());
             statement.setString(2, writer.getLastName());
-            statement.setLong(3, id);
+            statement.setLong(3, writer.getId());
             return statement.executeUpdate();
         }
     }

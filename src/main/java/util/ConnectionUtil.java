@@ -2,11 +2,13 @@ package util;
 
 
 import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public final class ConnectionUtil {
+@UtilityClass
+public class ConnectionUtil {
     private static final String URL_KEY = "db.url";
     private static final String USERNAME_KEY = "db.username";
     private static final String PASSWORD_KEY = "db.password";

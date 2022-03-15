@@ -36,7 +36,7 @@ public class LabelView {
         if(postId.isEmpty()) {
             throw new NullPointerException("Post id should`t be null");
         }
-        labelController.addNewLabel(name, Long.parseLong(postId));
+        labelController.addNewLabel(name);
     }
 
     public void getLabel() {

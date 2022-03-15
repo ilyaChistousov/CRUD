@@ -59,33 +59,33 @@ class LabelServiceImplTest {
 
     @Test
     void saveWithCorrectDataReturn1Test() {
-        when(labelRepository.save(any(Label.class), any(Long.class))).thenReturn(1);
+        when(labelRepository.save(any(Label.class))).thenReturn(1);
 
-        assertEquals(1, labelService.save(new Label(1L, "name"), 1L));
+        assertEquals(1, labelService.save(new Label( "name")));
     }
 
     @Test
     void saveThrowNPEIfIdIsNullTest() {
         Label label = new Label();
 
-        assertThrows(NullPointerException.class, () -> labelService.save(label, 2L));
+        assertThrows(NullPointerException.class, () -> labelService.save(label));
     }
 
     @Test
     void updateWithCorrectDateReturn1Test() {
         Label newLabel = new Label("new Name");
 
-        when(labelRepository.update(eq(newLabel), any(Long.class))).thenReturn(1);
+        when(labelRepository.update(eq(newLabel))).thenReturn(1);
 
-        assertEquals(1, labelService.update(newLabel, 1L));
+        assertEquals(1, labelService.update(newLabel));
     }
 
     @Test
     void updateThrowNPEIfNewNameIsNull() {
         Label newLabel = new Label();
-        when(labelRepository.update(eq(newLabel), any(Long.class))).thenReturn(1);
+        when(labelRepository.update(eq(newLabel))).thenReturn(1);
 
-        assertThrows(NullPointerException.class, () -> labelService.update(newLabel, 1L));
+        assertThrows(NullPointerException.class, () -> labelService.update(newLabel));
     }
 
     @Test

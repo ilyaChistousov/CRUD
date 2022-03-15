@@ -30,10 +30,11 @@ public class PostController {
 
     public void updatePost(String newContent, Long id) {
         Post newPost = new Post();
+        newPost.setId(id);
         newPost.setContent(newContent);
         newPost.setUpdated(new Timestamp(System.currentTimeMillis()));
         newPost.setStatus(PostStatus.UNDER_REVIEW);
-        postService.update(newPost, id);
+        postService.update(newPost);
     }
 
     public void deletePost(Long id) {

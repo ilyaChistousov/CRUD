@@ -5,5 +5,5 @@ import model.Label;
 
 public interface LabelRepository extends GeneralRepository<Label, Long> {
 
-    int save(Label label, Long postId);
+    int save(Label entity);
 }

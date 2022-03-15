@@ -38,11 +38,11 @@ public class PostServiceImpl implements PostService {
 
     @SneakyThrows
     @Override
-    public int update(Post newPost, Long id) {
+    public int update(Post newPost) {
         if(newPost.getContent().isEmpty()) {
             throw new NullPointerException("New content shouldn`t be empty");
         }
-        return postRepo.update(newPost, id);
+        return postRepo.update(newPost);
     }
 
     @Override

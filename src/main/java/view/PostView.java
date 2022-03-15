@@ -35,6 +35,7 @@ public class PostView {
         System.out.println("Enter id of the Writer: ");
         String writerId = scan.nextLine();
         postController.addNewPost(content, Long.parseLong(writerId));
+        System.out.println();
 
     }
 
@@ -42,10 +43,12 @@ public class PostView {
         System.out.println("Enter id of the Post: ");
         String id = scan.nextLine();
         System.out.println(postController.getPost(Long.parseLong(id)));
+        System.out.println();
     }
 
     public void getAllPosts() {
         System.out.println(postController.getAllPosts());
+        System.out.println();
     }
 
     public void updatePost() {

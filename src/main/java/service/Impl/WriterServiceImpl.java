@@ -38,11 +38,11 @@ public class WriterServiceImpl implements WriterService {
 
     @SneakyThrows
     @Override
-    public int update(Writer writer, Long id) {
+    public int update(Writer writer) {
         if(writer.getFirstName().isEmpty() | writer.getLastName().isEmpty()) {
             throw new NullPointerException("New First name and new Last name shouldn`t be empty");
         }
-        return writerRepo.update(writer, id);
+        return writerRepo.update(writer);
     }
 
     @Override

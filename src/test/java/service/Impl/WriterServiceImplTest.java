@@ -5,13 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.Impl.WriterRepoImpl;
 import service.WriterService;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -87,18 +84,18 @@ class WriterServiceImplTest {
         newWriter.setFirstName("new First name");
         newWriter.setLastName("new Last name");
 
-        when(writerRepository.update(eq(newWriter), any(Long.class))).thenReturn(1);
+        when(writerRepository.update(eq(newWriter))).thenReturn(1);
 
-        assertEquals(1, writerService.update(newWriter, 1L));
+        assertEquals(1, writerService.update(newWriter));
     }
 
     @Test
     void updateThrowNPEIfNewContentIsNullTest() {
         Writer writer = new Writer();
 
-        when(writerRepository.update(eq(writer), any(Long.class))).thenReturn(1);
+        when(writerRepository.update(eq(writer))).thenReturn(1);
 
-        assertThrows(NullPointerException.class, () -> writerService.update(writer, 1L));
+        assertThrows(NullPointerException.class, () -> writerService.update(writer));
     }
 
     @Test
